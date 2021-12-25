@@ -1,3 +1,6 @@
+" Alex Hartford
+" My vimrc
+
 
 " Vim with all enhancements
 source $VIMRUNTIME/vimrc_example.vim
