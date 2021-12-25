@@ -7,6 +7,7 @@ set lines=999
 filetype plugin indent on
 
 set hidden
+syntax on
 
 " Command fixes
 set shortmess+=T
@@ -59,6 +60,7 @@ nnoremap<leader>sv :source $MYVIMRC<cr>
 
 " Abbrevs {{{
 " Header
+iabbrev htmlhead <!DOCTYPE html><cr><html lang="en"><cr><head><cr><meta charset="UTF-8"><cr><meta nano="viewport" content="width=device-width, initial-scale=1.0"><cr><meta http-equiv="X-UA-Compatible" content="ie=edge"><cr><title>Document</title><cr></head><cr><body><cr>Hello, World!<cr></body><cr></html>
 iabbrev chead // Author: Alex Hartford<cr>Program: <cr>Date: <cr>
 iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
 " Signature
@@ -113,6 +115,7 @@ set noundofile
 set nobackup
 " }}}
 
+" Junk {{{
 " Use the internal diff if available.
 " Otherwise use the special 'diffexpr' for Windows.
 if &diffopt !~# 'internal'
@@ -151,4 +154,6 @@ function MyDiff()
   endif
 endfunction
 
-echom ">^.^<"
+" }}}
+
+"echom ">^.^<"
