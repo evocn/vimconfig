@@ -29,7 +29,6 @@ set ignorecase
 set noundofile
 set nobackup
 " }}}
-
 " Autocmds {{{
 
 augroup filetype_vim
@@ -55,7 +54,6 @@ augroup filetype_html
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END
 " }}}
-
 " Mappings {{{
 inoremap jk <esc>
 
@@ -82,7 +80,6 @@ iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
 " Signature
 iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
-
 " Mappings {{{
 
 " Build the current project
@@ -119,7 +116,6 @@ nnoremap _ ddkkp
 inoremap <c-u> <esc>viwUi
 nnoremap <c-u> viwU
 "}}}
-
 " Indentation settings {{{
 filetype plugin indent on
 set tabstop=4
