@@ -72,6 +72,9 @@ iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 
 " Mappings {{{
 
+" Build the current project
+nnoremap <c-b> :!build<esc>
+
 " Exit insert mode
 inoremap jk <esc>
 vnoremap jk <esc>
