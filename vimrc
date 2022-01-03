@@ -54,11 +54,17 @@ augroup filetype_html
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END
 " }}}
+
 " Mappings {{{
 inoremap jk <esc>
 
+" Build the current project
+nnoremap <c-b> :w<esc>:!build<esc>
+
 " select current word
 nnoremap <space> viw
+" Quotes around current word
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 
 nnoremap H 0
 vnoremap H 0
@@ -80,42 +86,6 @@ iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
 " Signature
 iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
-" Mappings {{{
-
-" Build the current project
-nnoremap <c-b> :!build<esc>
-
-" Exit insert mode
-inoremap jk <esc>
-vnoremap jk <esc>
-" Learning new esc sequence
-inoremap <esc> <nop>
-
-" Learning new keys.
-noremap <left> <nop>
-noremap <down> <nop>
-noremap <up> <nop>
-noremap <right> <nop>
-
-" select current word
-nnoremap <space> viw
-" Quotes around current word
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
-
-" Move to start of line
-nnoremap H 0
-" Move to end of line
-nnoremap L $
-
-" Move current line down
-nnoremap - ddp
-" Move current line up
-nnoremap _ ddkkp
-
-" Convert word to uppercase
-inoremap <c-u> <esc>viwUi
-nnoremap <c-u> viwU
-"}}}
 " Indentation settings {{{
 filetype plugin indent on
 set tabstop=4
