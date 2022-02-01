@@ -31,6 +31,8 @@ set nobackup
 " }}}
 " Autocmds {{{
 
+au BufRead,BufNewFile *.gd  set filetype=gdscript
+
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
@@ -53,16 +55,30 @@ augroup filetype_html
     autocmd BufWritePre,BufRead *.html :normal gg=G
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END
-" }}}
 
+" To go to last file position.
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" }}}
 " Mappings {{{
 inoremap jk <esc>
 
+nnoremap <right> <nop>
+nnoremap <left> <nop>
+nnoremap <down> <nop>
+nnoremap <up> <nop>
+
+nnoremap - Vdkkp<esc>
+nnoremap _ Vdp<esc>
+
 " Build the current project
-nnoremap <c-b> :w<esc>:!build<esc>
+nnoremap <c-b> :wa<esc>:!build<esc>
 
 " select current word
 nnoremap <space> viw
+nnoremap <S-Space> viW
 " Quotes around current word
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 
@@ -77,27 +93,24 @@ nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
+
+nnoremap q <nop>
+vnoremap q <nop>
+
+nnoremap <C-j> ciw<C-r>0<esc>
 "}}}
 " Abbrevs {{{
 " Header
 iabbrev htmlhead <!DOCTYPE html><cr><html lang="en"><cr><head><cr><meta charset="UTF-8"><cr><meta nano="viewport" content="width=device-width, initial-scale=1.0"><cr><meta http-equiv="X-UA-Compatible" content="ie=edge"><cr><title>Document</title><cr></head><cr><body><cr>Hello, World!<cr></body><cr></html>
-iabbrev chead // Author: Alex Hartford<cr>Program: <cr>Date: <cr>
+iabbrev chead // Author: Alex Hartford<cr>// Program: <cr>// File: <cr>// Date:
 iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
 " Signature
 iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
 " Indentation settings {{{
-filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
-set autochdir
-
-set number
-set nowrap
-set noundofile
-set nobackup
 " Status Line {{{
 set laststatus=2
 set statusline=%f\ " path
