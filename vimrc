@@ -2,7 +2,7 @@
 " My vimrc
 
 " Defaults {{{
-syntax on
+syntax enable
 filetype indent on
 
 " Quick vimrc Editing/Sourcing
@@ -25,11 +25,11 @@ set nowrap
 
 set incsearch
 set ignorecase
+set smartcase
 
 set noundofile
 set nobackup
 " }}}
-
 " Autocmds {{{
 
 augroup filetype_vim
@@ -55,7 +55,6 @@ augroup filetype_html
     autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup END
 " }}}
-
 " Mappings {{{
 inoremap jk <esc>
 
@@ -74,7 +73,6 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
 "}}}
-
 " Abbrevs {{{
 " Header
 iabbrev htmlhead <!DOCTYPE html><cr><html lang="en"><cr><head><cr><meta charset="UTF-8"><cr><meta nano="viewport" content="width=device-width, initial-scale=1.0"><cr><meta http-equiv="X-UA-Compatible" content="ie=edge"><cr><title>Document</title><cr></head><cr><body><cr>Hello, World!<cr></body><cr></html>
@@ -83,7 +81,6 @@ iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
 " Signature
 iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
-
 " Status Line {{{
 set laststatus=2
 set statusline=%f\ " path
