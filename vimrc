@@ -1,9 +1,7 @@
-" Alex Hartford
 " My vimrc
-
+"
 " Defaults {{{
 syntax enable
-filetype indent on
 
 " Quick vimrc Editing/Sourcing
 let mapleader = ","
@@ -11,7 +9,9 @@ nnoremap<leader>ev :vsplit $MYVIMRC<cr>
 nnoremap<leader>sv :source $MYVIMRC<cr>
 
 " indentation
-set tabstop=4
+filetype plugin indent on
+
+set softtabstop=4
 set shiftwidth=4
 set expandtab
 
@@ -32,7 +32,10 @@ set nobackup
 " }}}
 " Autocmds {{{
 
-au BufRead,BufNewFile *.gd  set filetype=gdscript
+augroup filetype_gd
+    autocmd!
+    autocmd BufRead,BufNewFile *.gd  set filetype=gdscript
+augroup END
 
 augroup filetype_vim
     autocmd!
@@ -55,6 +58,12 @@ augroup filetype_html
     autocmd!
     autocmd BufWritePre,BufRead *.html :normal gg=G
     autocmd BufNewFile,BufRead *.html setlocal nowrap
+augroup END
+
+augroup filetype_markdown
+    autocmd!
+    autocmd BufWritePre,BufRead *.md :normal gg=G
+    autocmd BufNewFile,BufRead *.md setlocal wrap
 augroup END
 
 " To go to last file position.
@@ -101,15 +110,11 @@ nnoremap <C-j> ciw<C-r>0<esc>
 " Abbrevs {{{
 " Header
 iabbrev htmlhead <!DOCTYPE html><cr><html lang="en"><cr><head><cr><meta charset="UTF-8"><cr><meta nano="viewport" content="width=device-width, initial-scale=1.0"><cr><meta http-equiv="X-UA-Compatible" content="ie=edge"><cr><title>Document</title><cr></head><cr><body><cr>Hello, World!<cr></body><cr></html>
-iabbrev chead // Author: Alex Hartford<cr>// Program: <cr>// File: <cr>// Date:
+iabbrev chead // Author: Alex Hartford<cr>Program: <cr>File: <cr>Date:
 iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
 " Signature
 iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
-" Indentation settings {{{
-set tabstop=4
-set shiftwidth=4
-set expandtab
 " Status Line {{{
 set laststatus=2
 set statusline=%f\ " path
@@ -120,3 +125,6 @@ set statusline+=/
 set statusline+=%L\  " lines
 set statusline+=[%c]\ " column
 " }}}
+" -- 
+"  Alex Hartford
+"  alexanderhartford@gmail.com 
