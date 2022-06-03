@@ -1,6 +1,9 @@
 " My vimrc
 " Defaults {{{
+
 syntax enable
+
+colorscheme desert
 
 " Quick vimrc Editing/Sourcing
 let mapleader = ","
@@ -15,28 +18,27 @@ set nocindent
 set nosmartindent
 set indentexpr=
 
+" Tab settings
+set expandtab
+set shiftwidth=4
+set smarttab
+
 " sets current directory
 set autochdir
 
+" Backspace over all characters
 set backspace=indent,eol,start
 
 set nonumber
 set nowrap
 
+" More intuitive searching
 set incsearch
 set ignorecase
 set smartcase
 
 set noundofile
 set nobackup
-
-set expandtab
-set shiftwidth=4
-set smarttab
-
-set wildmenu
-set wildmode=list:longest
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 " }}}
 " Autocmds {{{
 
@@ -96,7 +98,6 @@ endif
 " }}}
 " Mappings {{{
 inoremap jk <esc>
-
 noremap <right> <nop>
 noremap <left> <nop>
 noremap <down> <nop>
@@ -114,8 +115,8 @@ nnoremap <S-Space> viW
 " Quotes around current word
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 
-nnoremap H 0
-vnoremap H 0
+nnoremap H ^
+vnoremap H ^
 nnoremap L $
 vnoremap L $
 nnoremap J <c-f>
@@ -128,14 +129,15 @@ nnoremap <c-j> <c-w>j
 nnoremap q <nop>
 vnoremap q <nop>
 
-inoremap ( ()<Esc>i
-inoremap { {}<Esc>i
-inoremap <leader>{ {<cr>}
-inoremap [ []<Esc>i
-inoremap < <><Esc>i
-inoremap " ""<Esc>i
-
 nnoremap <C-j> ciw<C-r>0<esc>
+
+command WQA wqa
+command WQ wq
+command WA wa
+command Wq wq
+command Wa wa
+command W w
+command Q q
 "}}}
 " Abbrevs {{{
 " Header
@@ -161,9 +163,16 @@ set statusline+=/
 set statusline+=%L\  " lines
 set statusline+=[%c]\ " column
 " }}}
+" Plugins {{{
+call plug#begin()
 
-echom "(>^.^<)"
+"Plug 'junegunn/vim-easy-align'
+"Plug 'valloric/youcompleteme'
+"Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-surround'
+"Plug 'godlygeek/tabular'
+"Plug 'junegunn/vim-easy-align'
+"Plug 'unblevable/quick-scope'
 
-" -- 
-"  Alex Hartford
-"  alexanderhartford@gmail.com 
+call plug#end()
+" }}}
