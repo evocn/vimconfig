@@ -39,6 +39,24 @@ set smartcase
 
 set noundofile
 set nobackup
+
+" Mac Settings
+set guioptions=
+set fu
+set guifont=Monaco:h18
+
+" Tab Mappings
+noremap <silent> <D-1> :tabn 1<cr>
+noremap <silent> <D-2> :tabn 2<cr>
+noremap <silent> <D-3> :tabn 3<cr>
+noremap <silent> <D-4> :tabn 4<cr>
+noremap <silent> <D-5> :tabn 5<cr>
+noremap <silent> <D-6> :tabn 6<cr>
+noremap <silent> <D-7> :tabn 7<cr>
+noremap <silent> <D-8> :tabn 8<cr>
+noremap <silent> <D-9> :tabn 9<cr>
+
+nnoremap <silent> <leader>t <C-w>T
 " }}}
 " Autocmds {{{
 
@@ -112,25 +130,25 @@ nnoremap <c-b> :wa<esc>:!build<esc>
 " select current word
 nnoremap <space> viw
 nnoremap <S-Space> viW
-" Quotes around current word
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 
+" Getting around!
 nnoremap H ^
 vnoremap H ^
 nnoremap L $
 vnoremap L $
 nnoremap J <c-f>
 nnoremap K <c-b>
-
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
-nnoremap <c-j> <c-w>j
-nnoremap q <nop>
+vnoremap <c-j> <c-w>j
+vnoremap q <nop>
 vnoremap q <nop>
 
+" Nice Paste from bin mechanism.
 nnoremap <C-j> ciw<C-r>0<esc>
 
+" Typos
 command WQA wqa
 command WQ wq
 command WA wa
@@ -138,6 +156,8 @@ command Wq wq
 command Wa wa
 command W w
 command Q q
+
+
 "}}}
 " Abbrevs {{{
 " Header
@@ -153,26 +173,16 @@ iabbrev poemhead Author: Alex Hartford<cr>Date: <cr>Title: <cr>
 " Signature
 iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
-" Status Line {{{
-set laststatus=2
-set statusline=%f\ " path
-set statusline+=%y " filetype
-set statusline+=%= " right side
-set statusline+=%4l " line
-set statusline+=/
-set statusline+=%L\  " lines
-set statusline+=[%c]\ " column
-" }}}
 " Plugins {{{
 call plug#begin()
 
-"Plug 'junegunn/vim-easy-align'
-"Plug 'valloric/youcompleteme'
-"Plug 'tpope/vim-fugitive'
-"Plug 'tpope/vim-surround'
-"Plug 'godlygeek/tabular'
-"Plug 'junegunn/vim-easy-align'
-"Plug 'unblevable/quick-scope'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/TagHighlight'
+Plug 'valloric/youcompleteme'
 
 call plug#end()
 " }}}
