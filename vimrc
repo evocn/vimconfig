@@ -1,154 +1,60 @@
+" Alex Hartford
 " My vimrc
-" Defaults {{{
 
+" Plugins {{{
+call plug#begin()
+Plug 'elmcast/elm-vim'
+Plug 'preservim/nerdcommenter'
+Plug 'valloric/youcompleteme'
+Plug 'sjl/badwolf'
+call plug#end()
+let g:ycm_show_diagnostics_ui = 0
+" }}}
+" General {{{
 syntax enable
+filetype plugin indent on
 
-colorscheme desert
+silent! colorscheme badwolf
+hi Comment ctermfg=lightblue
 
-" Quick vimrc Editing/Sourcing
 let mapleader = ","
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" indentation
-"filetype plugin on
-filetype indent off
-set noautoindent
-set nocindent
-set nosmartindent
-set indentexpr=
-
-" Tab settings
-set expandtab
-set shiftwidth=4
-set smarttab
-
-" sets current directory
-set autochdir
-
-" Backspace over all characters
-set backspace=indent,eol,start
-
 set nonumber
 set nowrap
-
-" More intuitive searching
 set incsearch
 set ignorecase
 set smartcase
-
 set noundofile
 set nobackup
+set autochdir
+set backspace=indent,eol,start
 
-" Mac Settings
-set guioptions=
-set fu
-set guifont=Monaco:h18
-
-" Tab Mappings
-noremap <silent> <D-1> :tabn 1<cr>
-noremap <silent> <D-2> :tabn 2<cr>
-noremap <silent> <D-3> :tabn 3<cr>
-noremap <silent> <D-4> :tabn 4<cr>
-noremap <silent> <D-5> :tabn 5<cr>
-noremap <silent> <D-6> :tabn 6<cr>
-noremap <silent> <D-7> :tabn 7<cr>
-noremap <silent> <D-8> :tabn 8<cr>
-noremap <silent> <D-9> :tabn 9<cr>
-
-nnoremap <silent> <leader>t <C-w>T
+set tabstop=4
+set shiftwidth=4
+set expandtab
 " }}}
-" Autocmds {{{
-
-augroup general
-    autocmd!
-    "No comment continuation.
-    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-augroup END
-
-augroup filetype_scheme
-    autocmd!
-    autocmd filetype scheme set smartindent
-    autocmd filetype scheme set softtabstop=2
-    autocmd filetype scheme set shiftwidth=2
-    autocmd filetype scheme set expandtab
-augroup END
-
-augroup filetype_glsl
-    autocmd!
-    autocmd BufNewFile,BufRead *.vert,*.tesc,*.tese,*.glsl,*.geom,*.frag,*.comp,*.rgen,*.rmiss,*.rchit,*.rahit,*.rint,*.rcall set filetype=glsl
-augroup END
-    
-augroup filetype_gd
-    autocmd!
-    autocmd BufRead,BufNewFile *.gd  set filetype=gdscript
-augroup END
-
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-
-augroup filetype_python
-    autocmd!
-    autocmd FileType python nnoremap <buffer> <leader>c I#<esc>
-augroup END
-
-augroup filetype_c
-    autocmd!
-    autocmd FileType c,cpp nnoremap <buffer> <leader>c I//<esc>
-augroup END
-
-augroup filetype_html
-    autocmd!
-    autocmd BufNewFile,BufRead *.html setlocal nowrap
-augroup END
-
-augroup filetype_markdown
-    autocmd!
-    autocmd BufNewFile,BufRead *.md setlocal wrap
-augroup END
-
-" To go to last file position.
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-" }}}
-" Mappings {{{
+" Movement {{{
 inoremap jk <esc>
-noremap <right> <nop>
-noremap <left> <nop>
-noremap <down> <nop>
-noremap <up> <nop>
 
-nnoremap - Vdkkp<esc>
-nnoremap _ Vdp<esc>
-
-" Build the current project
-nnoremap <c-b> :wa<esc>:!build<esc>
-
-" select current word
 nnoremap <space> viw
+vnoremap <space> v
 nnoremap <S-Space> viW
 
-" Getting around!
 nnoremap H ^
 vnoremap H ^
 nnoremap L $
 vnoremap L $
 nnoremap J <c-f>
+vnoremap J <c-f>
 nnoremap K <c-b>
+vnoremap K <c-b>
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
-vnoremap <c-j> <c-w>j
-vnoremap q <nop>
-vnoremap q <nop>
+nnoremap <c-j> <c-w>j
 
-" Nice Paste from bin mechanism.
-nnoremap <C-j> ciw<C-r>0<esc>
-
-" Typos
 command WQA wqa
 command WQ wq
 command WA wa
@@ -156,33 +62,24 @@ command Wq wq
 command Wa wa
 command W w
 command Q q
-
-
-"}}}
-" Abbrevs {{{
-" Header
-iabbrev htmlhead <!DOCTYPE html><cr><html lang="en"><cr><head><cr><meta charset="UTF-8"><cr><meta nano="viewport" content="width=device-width, initial-scale=1.0"><cr><meta http-equiv="X-UA-Compatible" content="ie=edge"><cr><title>Document</title><cr></head><cr><body><cr>Hello, World!<cr></body><cr></html>
-iabbrev chead // Author: Alex Hartford<cr>// Program: <cr>// File: <cr>// Date:
-iabbrev headerhead #ifndef FILE_H<cr>#define FILE_H<cr><cr><cr>#endif
-iabbrev phead # Author: Alex Hartford<cr># Program: <cr># Date: <cr>
-iabbrev rackhead ;; Author:<cr>;; Program:<cr>;; Date:<cr><cr>#lang typed/racket<cr>#require typed/rackunit<cr>
-
-" Personal
-iabbrev poemhead Author: Alex Hartford<cr>Date: <cr>Title: <cr>
-
-" Signature
-iabbrev ssig -- <cr>Alex Hartford<cr>alexanderhartford@gmail.com
 " }}}
-" Plugins {{{
-call plug#begin()
 
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'altercation/vim-colors-solarized'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-scripts/TagHighlight'
-Plug 'valloric/youcompleteme'
-
-call plug#end()
+" Autocmds {{{
+if has("autocmd")
+    " Go to last file position.
+    au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\""
+    "No comment continuation.
+    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+    autocmd FileType vim setlocal foldmethod=marker
+endif
+" }}}
+" Status Line {{{
+set laststatus=2
+set statusline=%f\  " path
+set statusline+=%y  " filetype
+set statusline+=%=  " switch to the right side
+set statusline+=%4l  " line number
+set statusline+=/
+set statusline+=%L\  " total lines
+set statusline+=[%c]\  " column number
 " }}}
