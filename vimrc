@@ -1,21 +1,9 @@
 " Alex Hartford
 " My vimrc
 
-" Plugins {{{
-call plug#begin()
-Plug 'elmcast/elm-vim'
-Plug 'preservim/nerdcommenter'
-Plug 'valloric/youcompleteme'
-Plug 'sjl/badwolf'
-call plug#end()
-let g:ycm_show_diagnostics_ui = 0
-" }}}
 " General {{{
 syntax enable
 filetype plugin indent on
-
-silent! colorscheme badwolf
-hi Comment ctermfg=lightblue
 
 let mapleader = ","
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -24,7 +12,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 let g:markdown_folding = 1
 
 set nonumber
-set wrap
+set nowrap
 set incsearch
 set ignorecase
 set smartcase
@@ -57,6 +45,9 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
 
+nnoremap j gj
+nnoremap k gk
+
 nnoremap <c-e> viwpviwy
 
 nnoremap S ciw-><esc>
@@ -69,19 +60,33 @@ command Wq wq
 command Wa wa
 command W w
 command Q q
+cabbrev a<CR> wa
 " }}}
 " {{{ Cool Mappings
-" insert current date
-nnoremap <leader>d :silent put =strftime('%x')<cr>
+" insert new journal entry with date.
+nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
 " insert current time
 nnoremap <leader>t :silent put =strftime('%T')<cr>
+" Comment in Markdown
 nnoremap <leader>c i<!--<cr>--><esc>O
+" }}}
+" {{{ Functions
+fun! SetMyTodos()
+    syn match myTodos /\%(CONSIDER:\)\|\%(NOTE:\)/
+    hi link myTodos Todo
+endfu
+autocmd bufenter * :call SetMyTodos()
+autocmd filetype * :call SetMyTodos()
 " }}}
 
 " Autocmds {{{
 if has("autocmd")
     " Set filetype to markdown for files without filetypes.
     autocmd BufEnter * if &filetype == "" || &filetype == "conf" | setlocal ft=markdown | endif
+
+    " glsl filetypes
+    autocmd BufNewFile,BufRead *.frag setfiletype glsl
+    autocmd BufNewFile,BufRead *.vert setfiletype glsl
 
     " Go to last file position.
     au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\""
