@@ -6,16 +6,26 @@ syntax enable
 filetype plugin indent on
 
 let mapleader = ","
+
+" vimrc stuff
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" insert new journal entry with date.
+nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
+
+" switch tabs
+nnoremap <leader>t :tabnext<cr>
 
 let g:markdown_folding = 1
 
 set nonumber
 set nowrap
+
 set incsearch
 set ignorecase
 set smartcase
+
 set noundofile
 set nobackup
 set autochdir
@@ -29,13 +39,12 @@ set expandtab
 inoremap jk <esc>
 
 nnoremap <space> viw
-vnoremap <space> v
-nnoremap <S-Space> viW
 
 nnoremap H ^
 vnoremap H ^
 nnoremap L $
 vnoremap L $
+
 nnoremap J <c-f>
 vnoremap J <nop>
 nnoremap K <c-b>
@@ -48,53 +57,42 @@ nnoremap <c-j> <c-w>j
 nnoremap j gj
 nnoremap k gk
 
-nnoremap <c-e> viwpviwy
-
 nnoremap S ciw-><esc>
 nnoremap s ciw.<esc>
 
-command WQA wqa
-command WQ wq
-command WA wa
-command Wq wq
-command Wa wa
-command W w
 command Q q
-cabbrev a<CR> wa
-" }}}
-" {{{ Cool Mappings
-" insert new journal entry with date.
-nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
-" insert current time
-nnoremap <leader>t :silent put =strftime('%T')<cr>
-" Comment in Markdown
-nnoremap <leader>c i<!--<cr>--><esc>O
-" }}}
-" {{{ Functions
-fun! SetMyTodos()
-    syn match myTodos /\%(CONSIDER:\)\|\%(NOTE:\)/
-    hi link myTodos Todo
-endfu
-autocmd bufenter * :call SetMyTodos()
-autocmd filetype * :call SetMyTodos()
+command QA qa
+command Qa qa
+
+cabbrev a <nop>
+cabbrev wa quit
+cabbrev w quit
 " }}}
 
 " Autocmds {{{
 if has("autocmd")
-    " Set filetype to markdown for files without filetypes.
-    autocmd BufEnter * if &filetype == "" || &filetype == "conf" | setlocal ft=markdown | endif
+    " autosave (for the pinkie!!!)
+    autocmd TextChanged,TextChangedI * silent write
 
-    " glsl filetypes
-    autocmd BufNewFile,BufRead *.frag setfiletype glsl
-    autocmd BufNewFile,BufRead *.vert setfiletype glsl
+    " glsl
+    autocmd BufNewFile,BufRead *.fs setfiletype glsl | set syntax=glsl
+    autocmd BufNewFile,BufRead *.vs setfiletype glsl | set syntax=glsl
+    autocmd BufNewFile,BufRead *.gs setfiletype glsl | set syntax=glsl
+
+    " jai
+    autocmd BufNewFile,BufRead *.jai set filetype=jai | set syntax=jai
+
+    " tsv
+    autocmd BufNewFile,BufRead *.tsv setlocal tabstop=10 | setlocal shiftwidth=8 | setlocal noexpandtab
+
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType markdown setlocal textwidth=80
 
     " Go to last file position.
     au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\""
 
     " No comment continuation.
     autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType markdown setlocal textwidth=80
 
 endif
 " }}}
