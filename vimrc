@@ -14,7 +14,7 @@ let g:ycm_show_diagnostics_ui = 0
 syntax enable
 filetype plugin indent on
 
-silent! colorscheme badwolf
+silent! colorscheme industry
 hi Comment ctermfg=lightblue
 
 let mapleader = ","
@@ -76,6 +76,8 @@ nnoremap <leader>d :silent put =strftime('%x')<cr>
 " insert current time
 nnoremap <leader>t :silent put =strftime('%T')<cr>
 nnoremap <leader>c i<!--<cr>--><esc>O
+
+nnoremap <leader>b :!build<cr>
 " }}}
 
 " Autocmds {{{
