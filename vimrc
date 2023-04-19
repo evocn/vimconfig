@@ -35,6 +35,29 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 " }}}
+" Gui {{{
+if has("gui_running")
+    set guifont=Lucida\ Console:h12
+    set guioptions=i
+
+    " For Sharp Dark colors:
+    " let ayucolor="dark"
+    " colorscheme ayu
+
+    " For Soft Dark colors:
+    "set background=dark
+    "let g:everforest_background = "hard"
+    "let g:everforest_better_performance = 1
+    "colorscheme everforest
+
+    " For Soft Light colors:
+    "set background=light
+    "let g:everforest_background = "soft"
+    "let g:everforest_better_performance = 1
+    "colorscheme everforest
+
+endif
+" }}}
 " Movement {{{
 inoremap jk <esc>
 
