@@ -94,7 +94,7 @@ nnoremap <leader>t :silent put =strftime('%T')<cr>
 " Autocmds {{{
 if has("autocmd")
     " autosave (for the pinkie!!!)
-    autocmd TextChanged,TextChangedI * silent write
+    autocmd TextChanged,TextChangedI * if &readonly == 0 | silent write | endif
 
     " glsl
     autocmd BufNewFile,BufRead *.fs setfiletype glsl | set syntax=glsl
