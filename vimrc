@@ -87,8 +87,6 @@ command Q q
 
 " insert new journal entry with date.
 nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
-" insert current time
-nnoremap <leader>t :silent put =strftime('%T')<cr>
 " }}}
 
 " Autocmds {{{
