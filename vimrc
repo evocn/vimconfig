@@ -16,6 +16,7 @@ nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
 
 " switch tabs
 nnoremap <leader>t :tabnext<cr>
+nnoremap <leader>r :tabprevious<cr>
 
 let g:markdown_folding = 1
 
@@ -37,12 +38,13 @@ set expandtab
 " }}}
 " Gui {{{
 if has("gui_running")
+    set belloff=all
     set guifont=Lucida\ Console:h12
     set guioptions=i
 
     " For Sharp Dark colors:
-    " let ayucolor="dark"
-    " colorscheme ayu
+    let ayucolor="dark"
+    colorscheme ayu
 
     " For Soft Dark colors:
     "set background=dark
