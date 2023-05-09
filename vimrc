@@ -16,6 +16,7 @@ nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
 
 " switch tabs
 nnoremap <leader>t :tabnext<cr>
+nnoremap <leader>r :tabprevious<cr>
 
 let g:markdown_folding = 1
 
@@ -84,9 +85,6 @@ nnoremap S ciw-><esc>
 nnoremap s ciw.<esc>
 
 command Q q
-
-" insert new journal entry with date.
-nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
 " }}}
 
 " Autocmds {{{
@@ -125,4 +123,33 @@ set statusline+=%4l  " line number
 set statusline+=/
 set statusline+=%L\  " total lines
 set statusline+=[%c]\  " column number
+" }}}
+" Tab Line {{{
+function! Tabline() abort
+    let l:line = ''
+    let l:current = tabpagenr()
+
+    for l:i in range(1, tabpagenr('$'))
+        if l:i == l:current
+            let l:line .= '%#TabLineSel#'
+        else
+            let l:line .= '%#TabLine#'
+        endif
+
+        let l:label = fnamemodify(
+            \ bufname(tabpagebuflist(l:i)[tabpagewinnr(l:i) - 1]),
+            \ ':t'
+        \ )
+
+        let l:line .= '%' . i . 'T' " Starts mouse click target region.
+        let l:line .= '  ' . l:label . '  '
+    endfor
+
+    let l:line .= '%#TabLineFill#'
+    let l:line .= '%T' " Ends mouse click target region(s).
+
+    return l:line
+endfunction
+
+set tabline=%!Tabline()
 " }}}
