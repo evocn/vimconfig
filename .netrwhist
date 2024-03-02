@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='C:/jai/modules/miniaudio '
+let g:netrw_dirhist_8='C:/Users/alexa/Rpg/Lambda/content'
+let g:netrw_dirhist_7='C:/Users/alexa/Rpg/Lambda'
+let g:netrw_dirhist_6='C:/Users/alexa/Rpg/Lambda/content'
+let g:netrw_dirhist_5='C:/Users/alexa/Rpg/Lambda'
+let g:netrw_dirhist_4='C:/Users/alexa/Code/tact/boards'
+let g:netrw_dirhist_3='C:/Users/alexa/Rpg/Lambda/content'
+let g:netrw_dirhist_2='C:/Users/alexa/Rpg/Lambda'
+let g:netrw_dirhist_1='C:/Users/alexa/Rpg/Lambda/content'
+let g:netrw_dirhist_0='C:/Users/alexa/Rpg/Lambda'

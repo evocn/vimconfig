@@ -1,132 +1,62 @@
-" Alex Hartford
-" My vimrc
+" Alex Hartford's vimrc
 
-" General {{{
+" Defaults {{{
 syntax enable
 filetype plugin indent on
-
 let mapleader = ","
-
-" vimrc stuff
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" insert new journal entry with date.
-nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
-
-" switch tabs
-nnoremap <leader>t :tabnext<cr>
-nnoremap <leader>r :tabprevious<cr>
-
-" open ctags in new tabs
-nnoremap <silent><leader>c <C-w><C-]><C-w>T
-
-let g:markdown_folding = 1
-
-set nonumber
-set nowrap
-
-set incsearch
-set ignorecase
-set smartcase
-
-" I'm autosaving, so no backups necessary.
-set noundofile
-set nobackup
-set noswapfile
-
-set autochdir
-set backspace=indent,eol,start
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
-" }}}
-" Gui {{{
-if has("gui_running")
-    set belloff=all
-    set guifont=Lucida\ Console:h14
-    set guioptions=i
-
-    " For Sharp Dark colors:
-    "colorscheme ayu
-    "colorscheme synic
-    colorscheme rosebones
-    hi TabLineSel guibg=MediumSpringGreen guifg=black
-
-    highlight Comment guifg=MediumSpringGreen
-
-    " For Light colors:
-    "colorscheme vimbones
-    "highlight Comment guifg=black
-
-endif
-
+set autochdir backspace=indent,eol,start
+set nonumber nowrap
+set incsearch ignorecase smartcase
+set noundofile nobackup noswapfile
+set tabstop=4 shiftwidth=4 expandtab
+au BufNewFile,BufRead * setlocal formatoptions-=cro
 " }}}
 " Movement {{{
 inoremap jk <esc>
-
 nnoremap <space> viw
 
-nnoremap H ^
-vnoremap H ^
-nnoremap L $
-vnoremap L $
-
+noremap H ^
+noremap L $
 nnoremap J <c-f>
-vnoremap J <nop>
 nnoremap K <c-b>
-vnoremap K <nop>
+vnoremap J )
+vnoremap K (
+
+nnoremap <C-Tab>   :tabnext<cr>
+nnoremap <C-S-Tab> :tabprevious<cr>
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
-
-nnoremap j gj
-nnoremap k gk
-
-nnoremap S ciw-><esc>
-nnoremap s ciw.<esc>
-
-command Q q
 " }}}
+" Appearance {{{
+if has("gui_running")
+    set guioptions= belloff=all
 
-" Autocmds {{{
-if has("autocmd")
-    " autosave (for the pinkie!!!)
-    autocmd TextChanged,TextChangedI * if &readonly == 0 | silent write | endif
+    set guifont=Fira\ Mono\ Medium:h11
+    nnoremap <leader>v :set guifont=Fira\ Mono\ Medium:h11<CR>
+    nnoremap <leader>b :set guifont=Fira\ Mono\ Medium:h14<CR>
 
-    " glsl
-    autocmd BufNewFile,BufRead *.fs setfiletype glsl | set syntax=glsl
-    autocmd BufNewFile,BufRead *.vs setfiletype glsl | set syntax=glsl
-    autocmd BufNewFile,BufRead *.gs setfiletype glsl | set syntax=glsl
+    "colorscheme ayu
+    "colorscheme kalahari
+    colorscheme fahrenheit
+    "colorscheme gruvbox-high-contrast
 
-    " jai
-    autocmd BufNewFile,BufRead *.jai set filetype=jai | set syntax=jai
+    " Maximized window on startup
+    sleep 50m
+    au GUIEnter * simalt ~x
 
-    " tsv
-    autocmd BufNewFile,BufRead *.tsv setlocal tabstop=10 | setlocal shiftwidth=8 | setlocal noexpandtab
-
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType markdown setlocal textwidth=80
-
-    " Go to last file position.
-    au BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\""
-
-    " No comment continuation.
-    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+    highlight Comment guifg=LightPink
+    highlight Folded  guifg=LightBlue
 
 endif
-" }}}
+
 " Status Line {{{
 set laststatus=2
-set statusline=%f\  " path
-set statusline+=%y  " filetype
-set statusline+=%=  " switch to the right side
-set statusline+=%4l  " line number
-set statusline+=/
-set statusline+=%L\  " total lines
-set statusline+=[%c]\  " column number
+set statusline=\ %f\ %y%=
+set statusline+=%4l/%L\ [%c]\ 
 " }}}
 " Tab Line {{{
 function! Tabline() abort
@@ -157,3 +87,20 @@ endfunction
 
 set tabline=%!Tabline()
 " }}}
+"}}}
+
+" journal entry header
+nnoremap <leader>n o#<space><esc>:silent put =strftime('%x')<cr>v$hdklpkzcjji
+" open ctags in new tabs
+nnoremap <silent><leader>c <C-w><C-]><C-w>T
+" baregrep
+nnoremap <leader>g :!start baregrep.exe<CR>
+" autosave
+au TextChanged,TextChangedI * if &readonly == 0 | silent write | endif
+
+au BufNewFile,BufRead *.jai set filetype=jai | set syntax=jai
+au FileType vim setlocal foldmethod=marker
+let g:markdown_folding = 1
+
+" Make a break of slashes. We'll see if I like this.
+nnoremap <leader>m o<esc>80i/<esc>
