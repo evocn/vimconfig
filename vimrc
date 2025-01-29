@@ -53,6 +53,12 @@ nnoremap <leader>g :!start baregrep.exe<CR>
 " autosave
 au TextChanged,TextChangedI * if &readonly == 0 | silent write | endif
 
+" copy and paste
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
+
 " Cruft {{{
 set laststatus=2
 set statusline=\ %f\ %y%=
